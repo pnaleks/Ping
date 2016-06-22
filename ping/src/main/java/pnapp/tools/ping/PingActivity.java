@@ -374,7 +374,7 @@ public class PingActivity extends AppCompatActivity implements
     }
     public void updateNeighborhood() {
         if ( !mAdapter.removeChildren(R.string.drawer_group_neighborhood) ) {
-            mAdapter.addGroup(R.string.drawer_group_neighborhood,R.drawable.ic_action_search);
+            mAdapter.addGroup(R.string.drawer_group_neighborhood,R.drawable.ic_search_white_24dp);
         }
         WifiManager manager = (WifiManager) getSystemService(Context.WIFI_SERVICE);
         if (manager != null && manager.isWifiEnabled()) {
