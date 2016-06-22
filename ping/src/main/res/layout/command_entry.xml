@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+   	android:layout_height="match_parent"
+    tools:ignore="RtlHardcoded,ContentDescription" >
+
+    <AutoCompleteTextView
+	    android:id="@+id/text"
+    	android:layout_width="match_parent"
+    	android:layout_height="wrap_content"
+    	android:singleLine="true"
+    	android:imeOptions="actionGo"
+    	android:hint="@string/action_input"
+    	android:layout_gravity="bottom"
+    	android:gravity="left|center_vertical"
+    	android:textColor="@color/primary_text"
+    	android:textColorHint="@color/hint_text"
+    	android:fitsSystemWindows="true" />
+
+    <ImageButton
+        style="@style/Widget.AppCompat.ActionButton"
+        android:id="@+id/left"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="left" />
+
+    <ImageButton
+        style="@style/Widget.AppCompat.ActionButton"
+        android:id="@+id/right"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right" />
+
+</FrameLayout>

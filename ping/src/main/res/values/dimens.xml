@@ -1,0 +1,28 @@
+<resources>
+
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="message_box_padding_horizontal">16dp</dimen>
+    <dimen name="message_box_padding_vertical">16dp</dimen>
+
+    <!--
+         Per the design guidelines, navigation drawers should be between 240dp and 320dp:
+         https://developer.android.com/design/patterns/navigation-drawer.html
+    -->
+    <dimen name="navigation_drawer_width">280dp</dimen>
+
+    <dimen name="statistic_fragment_value_text_normal">20dp</dimen>
+    <dimen name="statistic_fragment_value_text_large">40dp</dimen>
+    <dimen name="statistic_fragment_label_text">10dp</dimen>
+    <dimen name="statistic_fragment_frame_layout_margin">2dp</dimen>
+
+    <dimen name="console_fragment_frame_layout_margin">2dp</dimen>
+
+    <dimen name="list_view_group_text1">18sp</dimen>
+    <dimen name="list_view_item_text1">22sp</dimen>
+    <dimen name="list_view_item_text2">14sp</dimen>
+
+    <dimen name="toast_vertical_offset">20dp</dimen>
+    <dimen name="action_button_min_width">48dp</dimen>
+
+    <dimen name="text_size_small">14sp</dimen>
+</resources>

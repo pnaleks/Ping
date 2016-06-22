@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="SeekBarPreference">
+        <!-- Минимум шкалы (используется если не задан атрибут scale) -->
+        <attr name="min" format="float"/>
+        <!-- Максимум шкалы (используется если не задан атрибут scale) -->
+        <attr name="max" format="float"/>
+        <!-- Шаг шкалы (используется если не задан атрибут scale) -->
+        <attr name="resolution" format="float"/>
+        <!-- Задает шкалу в виде набора абсолютных значений и приращений -->
+        <attr name="scale" format="string"/>
+        <!-- Задает формат представления текущего значения -->
+        <attr name="strFormat" format="string"/>
+        <!-- Задает формат представления текущего значения в крайне левом положении -->
+        <attr name="strMin" format="string"/>
+        <!-- Задает формат представления текущего значения в крайне правом положении -->
+        <attr name="strMax" format="string"/>
+    </declare-styleable>
+</resources>

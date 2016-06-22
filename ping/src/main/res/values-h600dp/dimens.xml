@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="statistic_fragment_value_text_normal">36dp</dimen>
+    <dimen name="statistic_fragment_value_text_large">72dp</dimen>
+    <dimen name="statistic_fragment_label_text">14dp</dimen>
+    <dimen name="statistic_fragment_frame_layout_margin">5dp</dimen>
+
+    <dimen name="console_fragment_frame_layout_margin">5dp</dimen>
+</resources>

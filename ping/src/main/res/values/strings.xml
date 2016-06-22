@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Ping</string>
+
+    <string name="action_settings">Settings</string>
+    <string name="action_input">Host name or IP</string>
+    <string name="action_play">Go</string>
+    <string name="action_clear">Clear</string>
+    <string name="action_important">Remove from favorites</string>
+    <string name="action_not_important">Add to favorites</string>
+    <string name="action_reset">Reset counters</string>
+    <string name="action_clear_console">Clear console</string>
+    <string name="action_scan">Look around</string>
+
+    <string name="local_gateway">Local gateway</string>
+    <string name="internet_gateway">Internet gateway</string>
+
+    <string name="drawer_group_bookmarks">Bookmarks</string>
+    <string name="drawer_group_neighborhood">Neighborhood</string>
+
+    <string name="node_found">Node found</string>
+
+    <string name="format_gateway_local">Local gateway (ttl=%d)</string>
+    <string name="format_gateway_internet">Internet gateway (ttl=%d)</string>
+
+    <!-- Statistic Fragment -->
+
+    <string name="host_name">Host name</string>
+    <string name="ip_address">IP address</string>
+    <string name="last_value">Last ping</string>
+    <string name="count_value">Packets transmitted/received (% of loss)</string>
+    <string name="mean_value">Mean ± Std</string>
+    <string name="max_value">Maximum/Minimum</string>
+	<string name="ms">ms</string>
+
+    <!-- Settings categories -->
+
+    <string name="pref_category_program">Program settings</string>
+    <string name="pref_category_options">Command options</string>
+
+    <!-- Program settings -->
+
+    <string name="pref_resolve_address_title">Resolve IPs to host names</string>
+    <string name="pref_resolve_address_summary_on">Request reverse DNS lookup if IP address was entered</string>
+    <string name="pref_resolve_address_summary_off">Reverse DNS lookup disabled</string>
+
+    <string name="pref_look_around_title">Look around at startup</string>
+    <string name="pref_look_around_summary_on">Search for neighbor nodes at the program start</string>
+    <string name="pref_look_around_summary_off">Don\'t search for neighbor nodes</string>
+
+    <string name="pref_buffer_size_title">Console buffer size</string>
+    <string name="pref_buffer_size_summary">%.0f lines</string>
+
+    <string name="pref_verbose_output_title">Verbose output</string>
+    <string name="pref_verbose_output_summary_on">Display extended output</string>
+    <string name="pref_verbose_output_summary_off">Show only response messages</string>
+
+    <!-- Ping command options -->
+
+    <string name="pref_enable_options_title">Pass user defined options</string>
+    <string name="pref_enable_options_summary_on">No options enabled</string>
+    <string name="pref_enable_options_summary_off">No options will be set in the command line</string>
+
+	<string name="pref_count_title">-c\u2003Count of packets to be sent</string>
+	<string name="pref_count_format">Stop after %.0f packets</string>
+	<string name="pref_count_disabled">Option disabled</string>
+
+	<string name="pref_interval_title">-i\u2003Interval between sending packets</string>
+	<string name="pref_interval_format">Wait %.1f seconds</string>
+	<string name="pref_interval_disabled">Option disabled</string>
+	
+    <string name="pref_ttl_title">-t\u2003IP Time To Live</string>
+    <string name="pref_ttl_format">Throw packet after %.0f hops</string>
+    <string name="pref_ttl_disabled">Option disabled</string>
+
+    <string name="pref_deadline_title">-w\u2003Timeout to exit ping</string>
+    <string name="pref_deadline_format">Exit after %.0f seconds</string>
+    <string name="pref_deadline_disabled">Option disabled</string>
+
+    <string name="pref_timeout_title">-W\u2003Time to wait for a response</string>
+    <string name="pref_timeout_format">Wait %.0f seconds</string>
+    <string name="pref_timeout_disabled">Option disabled</string>
+    <string name="pref_beep_title">Beep on response</string>
+    <string name="pref_beep_summary_on">Enabled</string>
+    <string name="pref_beep_summary_off">Disabled</string>
+    <string name="pref_packet_size_title">-s\u2003Number of data bytes to be sent</string>
+    <string name="pref_packet_size_format">%.0f bytes</string>
+    <string name="pref_disabled">Option disabled</string>
+    <string name="action_man_page">Linux man page</string>
+    <string name="title_settings">Settings</string>
+    <string name="title_man_page">ping(8) - Linux man page</string>
+
+    <string name="drawer_open">Open navigation drawer</string>
+    <string name="drawer_close">Close navigation drawer</string>
+
+</resources>

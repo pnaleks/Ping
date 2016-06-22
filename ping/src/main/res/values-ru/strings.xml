@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Ping</string>
+    <string name="action_clear">Очистить</string>
+    <string name="action_clear_console">Очистить консоль</string>
+    <string name="action_important">Убрать из избранного</string>
+    <string name="action_input">Сетевое имя или IP-адрес</string>
+    <string name="action_not_important">Добавить в избранное</string>
+    <string name="action_play">Пуск</string>
+    <string name="action_reset">Сбросить счетчики</string>
+    <string name="action_scan">Поиск окружения</string>
+    <string name="action_settings">Настройки</string>
+    <string name="count_value">Пакетов отправлено/принято (% потерь)</string>
+    <string name="drawer_group_bookmarks">Закладки</string>
+    <string name="drawer_group_neighborhood">Окружение</string>
+    <string name="host_name">Сетевое имя</string>
+    <string name="internet_gateway">Шлюз интернета</string>
+    <string name="ip_address">IP адрес</string>
+    <string name="last_value">Последний пинг</string>
+    <string name="local_gateway">Локальный шлюз</string>
+    <string name="max_value">Максимум/минимум</string>
+    <string name="mean_value">Среднее ± ст.откл.</string>
+    <string name="ms">мс</string>
+    <string name="node_found">Найден узел</string>
+    <string name="pref_beep_summary_off">Запрещено</string>
+    <string name="pref_beep_summary_on">Разрешено</string>
+    <string name="pref_beep_title">Звуковой сигнал</string>
+    <string name="pref_buffer_size_summary">%.0f строк</string>
+    <string name="pref_buffer_size_title">Размер буфера консоли</string>
+    <string name="pref_category_options">Параметры вызова</string>
+    <string name="pref_category_program">Настройки программы</string>
+    <string name="pref_count_disabled">Параметр выключен</string>
+    <string name="pref_count_format">Остановка после %.0f пакетов</string>
+    <string name="pref_count_title">-c\u2003Число пакетов для отправки</string>
+    <string name="pref_deadline_disabled">Параметр выключен</string>
+    <string name="pref_deadline_format">Остановка после %.0f секунд</string>
+    <string name="pref_deadline_title">-w\u2003Таймаут</string>
+    <string name="pref_enable_options_summary_off">Параметры не будут подставлены в командную строку</string>
+    <string name="pref_enable_options_summary_on">Нет разрешенных параметров</string>
+    <string name="pref_enable_options_title">Использовать параметры заданные пользователем</string>
+    <string name="pref_interval_disabled">Параметр выключен</string>
+    <string name="pref_interval_format">Интервал %.1f сек.</string>
+    <string name="pref_interval_title">-i\u2003Интервал между отправкой пакетов</string>
+    <string name="pref_look_around_summary_off">Не искать соседние сетевые узлы</string>
+    <string name="pref_look_around_summary_on">Искать соседние сетевые узлы</string>
+    <string name="pref_look_around_title">Искать соседние узлы при запуске программы</string>
+    <string name="pref_resolve_address_summary_off">Обратный DNS запрос не выполняется</string>
+    <string name="pref_resolve_address_summary_on">Если узел задан IP адресом, будет выполнен обратный DNS запрос</string>
+    <string name="pref_resolve_address_title">Определять сетевое имя по IP адресу</string>
+    <string name="pref_timeout_disabled">Параметр выключен</string>
+    <string name="pref_timeout_format">Ожидане %.0f секунд</string>
+    <string name="pref_timeout_title">-W\u2003Время ожидания ответа</string>
+    <string name="pref_ttl_disabled">Параметр выключен</string>
+    <string name="pref_ttl_format">Отбросить пакет после %.0f узлов</string>
+    <string name="pref_ttl_title">-t\u2003Время жизни IP пакета</string>
+    <string name="pref_verbose_output_summary_off">Показывать только сообщения о принятых пакетах</string>
+    <string name="pref_verbose_output_summary_on">Показывать все сообщения</string>
+    <string name="pref_verbose_output_title">Подробный вывод</string>
+    <string name="pref_disabled">Параметр выключен</string>
+    <string name="pref_packet_size_format">%.0f байт</string>
+    <string name="pref_packet_size_title">-s\u2003Число байт данных для отправки</string>
+    <string name="action_man_page">Linux man page</string>
+    <string name="title_settings">Настройки</string>
+    <string name="title_man_page">ping(8) - Linux man page</string>
+
+    <string name="drawer_close">Закрыть боковую панель</string>
+    <string name="drawer_open">Открыть боковую панель</string>
+    <string name="format_gateway_internet">Шлюз интернета (ttl=%d)</string>
+    <string name="format_gateway_local">Локальный шлюз (ttl=%d)</string>
+</resources>

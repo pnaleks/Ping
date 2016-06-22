@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/statistic_fragment_frame_layout_margin"
+    android:background="@color/ping_color_light"
+    android:orientation="vertical" >
+    
+    <FrameLayout style="@style/statistic_fragment_frame_layout" >
+        
+        <TextView
+            style="@style/statistic_fragment_label"
+            android:text="@string/host_name" />
+        
+        <TextView
+            android:id="@+id/host_name"
+            style="@style/statistic_fragment_value" />
+
+    </FrameLayout>
+
+    <FrameLayout style="@style/statistic_fragment_frame_layout" >
+        
+        <TextView
+            style="@style/statistic_fragment_label"
+            android:text="@string/ip_address" />
+        
+        <TextView
+            android:id="@+id/ip_address"
+            style="@style/statistic_fragment_value" />
+
+    </FrameLayout>
+
+    <FrameLayout style="@style/statistic_fragment_frame_layout"
+        android:layout_weight="1.5" >
+        
+        <TextView
+            style="@style/statistic_fragment_label"
+            android:text="@string/last_value" />
+        
+        <TextView
+            android:id="@+id/last_value"
+            style="@style/statistic_fragment_value"
+            android:textSize="@dimen/statistic_fragment_value_text_large" />
+
+        <TextView
+            style="@style/statistic_fragment_label"
+            android:layout_gravity="right|top"
+            android:text="@string/ms" />
+    
+    </FrameLayout>
+
+    <FrameLayout style="@style/statistic_fragment_frame_layout" >
+        
+        <TextView
+            style="@style/statistic_fragment_label"
+            android:text="@string/count_value" />
+        
+        <TextView
+            android:id="@+id/count_value"
+            style="@style/statistic_fragment_value" />
+
+    </FrameLayout>
+    
+    <FrameLayout style="@style/statistic_fragment_frame_layout" >
+        
+        <TextView
+            style="@style/statistic_fragment_label"
+            android:text="@string/mean_value" />
+        
+        <TextView
+            android:id="@+id/mean_value"
+            style="@style/statistic_fragment_value" />
+
+        <TextView
+            style="@style/statistic_fragment_label"
+            android:layout_gravity="right|top"
+            android:text="@string/ms" />
+        
+    </FrameLayout>
+    
+    <FrameLayout style="@style/statistic_fragment_frame_layout" >
+        
+        <TextView
+            style="@style/statistic_fragment_label"
+            android:text="@string/max_value" />
+        
+        <TextView
+            android:id="@+id/max_value"
+            style="@style/statistic_fragment_value" />
+
+        <TextView
+            style="@style/statistic_fragment_label"
+            android:layout_gravity="right|top"
+            android:text="@string/ms" />
+    
+    </FrameLayout>
+
+</LinearLayout>

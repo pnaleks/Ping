@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:custom="http://schemas.android.com/apk/res/pnapp.tools.ping">
+
+    <PreferenceCategory
+        android:title="@string/pref_category_program">
+        <CheckBoxPreference
+            android:key="pref_resolve_address"
+            android:title="@string/pref_resolve_address_title"
+            android:summaryOn="@string/pref_resolve_address_summary_on"
+            android:summaryOff="@string/pref_resolve_address_summary_off"
+            android:defaultValue="true" />
+
+        <CheckBoxPreference
+            android:key="pref_look_around"
+            android:title="@string/pref_look_around_title"
+            android:summaryOn="@string/pref_look_around_summary_on"
+            android:summaryOff="@string/pref_look_around_summary_off"
+            android:defaultValue="false" />
+
+        <CheckBoxPreference
+            android:key="pref_beep"
+            android:title="@string/pref_beep_title"
+            android:summaryOn="@string/pref_beep_summary_on"
+            android:summaryOff="@string/pref_beep_summary_off"
+            android:defaultValue="false"/>
+
+        <pnapp.tools.ping.SeekBarPreference
+            android:key="pref_buffer_size"
+            android:title="@string/pref_buffer_size_title"
+            android:defaultValue="100"
+            custom:strFormat="@string/pref_buffer_size_summary"
+            custom:min="10"
+            custom:max="500"
+            custom:resolution="10"/>
+
+        <CheckBoxPreference
+            android:key="pref_verbose_output"
+            android:title="@string/pref_verbose_output_title"
+            android:summaryOn="@string/pref_verbose_output_summary_on"
+            android:summaryOff="@string/pref_verbose_output_summary_off"
+            android:defaultValue="true" />
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="@string/pref_category_options">
+        <CheckBoxPreference
+            android:key="pref_enable_options"
+            android:title="@string/pref_enable_options_title"
+            android:summaryOn="@string/pref_enable_options_summary_on"
+            android:summaryOff="@string/pref_enable_options_summary_off"
+            android:defaultValue="false"/>
+
+        <pnapp.tools.ping.SeekBarPreference
+            android:key="pref_count"
+            android:dependency="pref_enable_options"
+            android:title="@string/pref_count_title"
+            custom:strFormat="@string/pref_count_format"
+            custom:strMin="@string/pref_count_disabled"
+            android:defaultValue="0"
+            custom:scale="0 i1 20 i5 150 i50 1000"/>
+
+        <pnapp.tools.ping.SeekBarPreference
+            android:key="pref_interval"
+            android:dependency="pref_enable_options"
+            android:title="@string/pref_interval_title"
+            custom:strFormat="@string/pref_interval_format"
+            custom:strMin="@string/pref_interval_disabled"
+            android:defaultValue="0"
+            custom:scale="0 0.2 i0.1 2 i1 20 i10 120"/>
+
+        <pnapp.tools.ping.SeekBarPreference
+            android:key="pref_ttl"
+            android:dependency="pref_enable_options"
+            android:title="@string/pref_ttl_title"
+            custom:strFormat="@string/pref_ttl_format"
+            custom:strMin="@string/pref_ttl_disabled"
+            android:defaultValue="0"
+            custom:min="0"
+            custom:max="255"
+            custom:resolution="1"/>
+
+        <pnapp.tools.ping.SeekBarPreference
+            android:key="pref_deadline"
+            android:dependency="pref_enable_options"
+            android:title="@string/pref_deadline_title"
+            custom:strFormat="@string/pref_deadline_format"
+            custom:strMin="@string/pref_deadline_disabled"
+            android:defaultValue="0"
+            custom:scale="0 i1 20 i5 200 i50 1000"/>
+
+        <pnapp.tools.ping.SeekBarPreference
+            android:key="pref_timeout"
+            android:dependency="pref_enable_options"
+            android:title="@string/pref_timeout_title"
+            custom:strFormat="@string/pref_timeout_format"
+            custom:strMin="@string/pref_timeout_disabled"
+            android:defaultValue="0"
+            custom:min="0"
+            custom:max="120"
+            custom:resolution="1"/>
+
+        <pnapp.tools.ping.SeekBarPreference
+            android:key="pref_packet_size"
+            android:dependency="pref_enable_options"
+            android:title="@string/pref_packet_size_title"
+            custom:strFormat="@string/pref_packet_size_format"
+            custom:strMin="@string/pref_disabled"
+            android:defaultValue="-1"
+            custom:scale="-1 8 i1 16 i4 64 i32 512 i256 4096 i2048 65507"/>
+    </PreferenceCategory>
+</PreferenceScreen>
