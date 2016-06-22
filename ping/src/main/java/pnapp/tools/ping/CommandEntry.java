@@ -84,9 +84,9 @@ public class CommandEntry extends FrameLayout {
             }
         });
 
-        mDrawablePlay    = ContextCompat.getDrawable(mContext, R.drawable.ic_action_play);
-        mDrawableStop    = ContextCompat.getDrawable(mContext, R.drawable.ic_action_stop);
-		mDrawableCancel  = ContextCompat.getDrawable(mContext, R.drawable.ic_action_cancel);
+        mDrawablePlay    = ContextCompat.getDrawable(mContext, R.drawable.ic_play_arrow_white_24dp);
+        mDrawableStop    = ContextCompat.getDrawable(mContext, R.drawable.ic_stop_white_24dp);
+		mDrawableCancel  = ContextCompat.getDrawable(mContext, R.drawable.ic_clear_white_24dp);
 		mDrawableBookmark = ContextCompat.getDrawable(mContext, R.drawable.ic_bookmark_white_24dp);
 		mDrawableBookmarkBorder = ContextCompat.getDrawable(mContext, R.drawable.ic_bookmark_border_white_24dp);
 
