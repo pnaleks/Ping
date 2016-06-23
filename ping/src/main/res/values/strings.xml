@@ -49,6 +49,14 @@
     <string name="pref_look_around_summary_on">Search for neighbor nodes at the program start</string>
     <string name="pref_look_around_summary_off">Don\'t search for neighbor nodes</string>
 
+    <string name="pref_beep_title">Beep on response</string>
+    <string name="pref_beep_summary_on">Enabled</string>
+    <string name="pref_beep_summary_off">Disabled</string>
+
+    <string name="pref_vibrate_title">Vibrate on response</string>
+    <string name="pref_vibrate_summary_on">Enabled</string>
+    <string name="pref_vibrate_summary_off">Disabled</string>
+
     <string name="pref_buffer_size_title">Console buffer size</string>
     <string name="pref_buffer_size_summary">%.0f lines</string>
 
@@ -81,9 +89,6 @@
     <string name="pref_timeout_title">-W\u2003Time to wait for a response</string>
     <string name="pref_timeout_format">Wait %.0f seconds</string>
     <string name="pref_timeout_disabled">Option disabled</string>
-    <string name="pref_beep_title">Beep on response</string>
-    <string name="pref_beep_summary_on">Enabled</string>
-    <string name="pref_beep_summary_off">Disabled</string>
     <string name="pref_packet_size_title">-s\u2003Number of data bytes to be sent</string>
     <string name="pref_packet_size_format">%.0f bytes</string>
     <string name="pref_disabled">Option disabled</string>

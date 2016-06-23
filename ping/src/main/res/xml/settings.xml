@@ -26,6 +26,13 @@
             android:summaryOff="@string/pref_beep_summary_off"
             android:defaultValue="false"/>
 
+        <CheckBoxPreference
+            android:key="pref_vibrate"
+            android:title="@string/pref_vibrate_title"
+            android:summaryOn="@string/pref_vibrate_summary_on"
+            android:summaryOff="@string/pref_vibrate_summary_off"
+            android:defaultValue="false"/>
+
         <pnapp.tools.ping.SeekBarPreference
             android:key="pref_buffer_size"
             android:title="@string/pref_buffer_size_title"

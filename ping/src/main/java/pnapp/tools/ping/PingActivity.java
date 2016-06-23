@@ -8,6 +8,7 @@ import android.media.MediaPlayer;
 import android.net.DhcpInfo;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
+import android.os.Vibrator;
 import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
@@ -52,6 +53,7 @@ public class PingActivity extends AppCompatActivity implements
     public static final String PREF_LOOK_AROUND       = "pref_look_around";
     public static final String PREF_RESOLVE_ADDRESS   = "pref_resolve_address";
     public static final String PREF_BEEP              = "pref_beep";
+    public static final String PREF_VIBRATE           = "pref_vibrate";
 
     // Имена параметров для опций команды ping
     public static final String PREF_ENABLE_OPTIONS    = "pref_enable_options";
@@ -90,6 +92,8 @@ public class PingActivity extends AppCompatActivity implements
     private String mOptions = "";
 
     private MediaPlayer mMediaPlayer;
+    /** Если истина - вибрировать при отклике */
+    private boolean vibrate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -186,6 +190,8 @@ public class PingActivity extends AppCompatActivity implements
             mMediaPlayer.release();
             mMediaPlayer = null;
         }
+
+        vibrate = sp.getBoolean(PREF_VIBRATE,false);
     }
 
     @Override
@@ -325,10 +331,14 @@ public class PingActivity extends AppCompatActivity implements
 	public void onPing(Pinger pinger) {
         ConsoleFragment.getInstance().put(pinger);
         StatisticFragment.getInstance().put(pinger);
-        if( mMediaPlayer != null && pinger.getStatus() == Pinger.STATUS_RESPONSE )
-        {
-            if ( mMediaPlayer.isPlaying() ) mMediaPlayer.seekTo(0);
-            else mMediaPlayer.start();
+        if( pinger.getStatus() == Pinger.STATUS_RESPONSE ) {
+            if( mMediaPlayer != null ) {
+                if (mMediaPlayer.isPlaying()) mMediaPlayer.seekTo(0);
+                else mMediaPlayer.start();
+            }
+            if( vibrate ) {
+                ((Vibrator) getSystemService(Context.VIBRATOR_SERVICE)).vibrate(25L);
+            }
         }
 		if ( !mPinger.isRunning() ) {
             mEntryView.toggleAction();

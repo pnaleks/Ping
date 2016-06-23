@@ -67,4 +67,7 @@
     <string name="drawer_open">Открыть боковую панель</string>
     <string name="format_gateway_internet">Шлюз интернета (ttl=%d)</string>
     <string name="format_gateway_local">Локальный шлюз (ttl=%d)</string>
+    <string name="pref_vibrate_summary_off">Запрещено</string>
+    <string name="pref_vibrate_summary_on">Разрешено</string>
+    <string name="pref_vibrate_title">Вибрация</string>
 </resources>

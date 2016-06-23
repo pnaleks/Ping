@@ -1,8 +1,10 @@
 package pnapp.tools.ping;
 
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 import android.os.Bundle;
+import android.os.Vibrator;
 import android.preference.CheckBoxPreference;
 import android.preference.PreferenceFragment;
 
@@ -51,6 +53,9 @@ public class SettingsFragment extends PreferenceFragment implements OnSharedPref
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		addPreferencesFromResource(R.xml.settings);
+        if( !((Vibrator) getActivity().getSystemService(Context.VIBRATOR_SERVICE)).hasVibrator() ) {
+            findPreference(PingActivity.PREF_VIBRATE).setEnabled(false);
+        }
 	}
 	
 	@Override

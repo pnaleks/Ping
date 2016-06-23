@@ -24,13 +24,15 @@
         android:id="@+id/left"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="left" />
+        android:layout_gravity="left"
+		android:alpha="0.8"/>
 
     <ImageButton
         style="@style/Widget.AppCompat.ActionButton"
         android:id="@+id/right"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="right" />
+        android:layout_gravity="right"
+		android:alpha="0.8" />
 
 </FrameLayout>
