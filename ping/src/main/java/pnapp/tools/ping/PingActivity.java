@@ -14,12 +14,12 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBar.LayoutParams;
 import android.support.v7.app.AppCompatActivity;
-import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -238,6 +238,16 @@ public class PingActivity extends AppCompatActivity implements
 		}
     }
 
+    @Override
+    public void onBackPressed() {
+        if( closeDrawer() ) return;
+        if ( mPinger.isRunning() ) mPinger.cancel();
+        mPinger.resetCounters();
+        StatisticFragment.getInstance().clear();
+        ConsoleFragment.getInstance().clear();
+        super.onBackPressed();
+    }
+
     public void updatePageIndicator(int position) {
         TextView t = (TextView) findViewById(R.id.page_indicator);
         if ( t != null ) {
@@ -293,17 +303,6 @@ public class PingActivity extends AppCompatActivity implements
     	}
     	
         return super.onOptionsItemSelected(item);
-    }
-
-    @Override
-    public boolean onKeyUp(int keyCode, @NonNull KeyEvent event) {
-        if( keyCode == KeyEvent.KEYCODE_BACK )  {
-            if ( mPinger.isRunning() ) mPinger.cancel();
-            mPinger.resetCounters();
-            StatisticFragment.getInstance().clear();
-            ConsoleFragment.getInstance().clear();
-        }
-        return super.onKeyUp(keyCode, event);
     }
 
     @Override
@@ -418,8 +417,20 @@ public class PingActivity extends AppCompatActivity implements
 
     public boolean isDrawerOpen() {
         DrawerLayout drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-        View fragmentContainerView = findViewById(R.id.navigation_drawer);
-        return drawerLayout != null && fragmentContainerView != null && drawerLayout.isDrawerOpen(fragmentContainerView);
+        return drawerLayout != null && drawerLayout.isDrawerOpen(GravityCompat.START);
+    }
+
+    /**
+     * Закрывает боковую панель, если она открыта
+     * @return истину, если боковая панель закрыта в результате вызова функции
+     */
+    public boolean closeDrawer() {
+        DrawerLayout drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        if( drawerLayout != null && drawerLayout.isDrawerOpen(GravityCompat.START) ) {
+            drawerLayout.closeDrawer(GravityCompat.START);
+            return true;
+        }
+        return false;
     }
 
 }
