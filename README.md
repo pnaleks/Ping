@@ -25,3 +25,5 @@ Ping (ru-RU)
 * Простой поиск сетевых узлов
 * Бесплатно и без рекламы
 * Отдельные опции командной строки можно установить через меню настройки
+
+[Приложение в Google Play](https://play.google.com/store/apps/details?id=pnapp.tools.ping&hl=ru)
