@@ -1,3 +1,6 @@
+/*
+ *  Copyright (c) 2016 P.N.Alekseev <pnaleks@gmail.com>
+ */
 package pnapp.tools.ping;
 
 import android.app.Fragment;
@@ -11,10 +14,6 @@ import android.view.ViewGroup;
 import android.webkit.WebView;
 import android.widget.FrameLayout;
 
-/**
- * @author P.N.Alekseev
- * @author pnaleks@gmail.com
- */
 public class SettingsActivity extends AppCompatActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {

@@ -1,7 +1,11 @@
+/*
+ *  Copyright (c) 2016 P.N.Alekseev <pnaleks@gmail.com>
+ */
 package pnapp.tools.ping;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.ContentLoadingProgressBar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,13 +13,13 @@ import android.widget.TextView;
 
 import java.util.Locale;
 
-/**
- * @author P.N.Alekseev
- * @author pnaleks@gmail.com
- */
 public class StatisticFragment extends Fragment {
     private static final String STR_UNKNOWN = "—";
-	private View mView;
+ 	private View mView;
+
+    private ContentLoadingProgressBar mResolveProgressBar;
+    private ContentLoadingProgressBar mReverseProgressBar;
+
 
     public String mHostName = "";
     public String mHostAddress = "";
@@ -41,6 +45,13 @@ public class StatisticFragment extends Fragment {
         if (mHostName != null) setText(R.id.host_name, mHostName);
         if (mHostAddress != null) setText(R.id.ip_address, mHostAddress);
         if (mLastPinger != null) put(mLastPinger);
+
+        mResolveProgressBar = (ContentLoadingProgressBar) mView.findViewById(R.id.progress_resolve);
+        mReverseProgressBar = (ContentLoadingProgressBar) mView.findViewById(R.id.progress_reverse);
+
+        mResolveProgressBar.hide();
+        mReverseProgressBar.hide();
+
 		return mView;
 	}
 
@@ -57,20 +68,28 @@ public class StatisticFragment extends Fragment {
         mView = null;
     }
 
-    public void setHostName(String name) {
+    public void setHostName(String name, boolean showProgress) {
         mHostName = (name == null) ? STR_UNKNOWN : name;
         if ( mView != null ) setText(R.id.host_name, mHostName);
+        if (showProgress)
+            mReverseProgressBar.show();
+        else
+            mReverseProgressBar.hide();
     }
 
-    public void setHostAddress(String address) {
+    public void setHostAddress(String address, boolean showProgress) {
         mHostAddress = (address == null) ? STR_UNKNOWN : address;
         if ( mView != null ) setText(R.id.ip_address, mHostAddress);
+        if (showProgress)
+            mResolveProgressBar.show();
+        else
+            mResolveProgressBar.hide();
     }
 
 
 	public void put(Resolver r) {
-        setHostName(r.getHostName());
-        setHostAddress(r.getHostAddress());
+        setHostName(r.getHostName(), false);
+        setHostAddress(r.getHostAddress(), false);
 	}
 
 	public void put(Pinger p) {
@@ -104,11 +123,12 @@ public class StatisticFragment extends Fragment {
 	}
 
     public void clear() {
-        setHostName("");
-        setHostAddress("");
+        setHostName("", false);
+        setHostAddress("", false);
         setText(R.id.last_value,  "");
         setText(R.id.count_value, "");
         setText(R.id.mean_value,  "");
         setText(R.id.max_value,   "");
     }
+
 }

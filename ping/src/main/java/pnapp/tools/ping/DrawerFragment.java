@@ -1,3 +1,6 @@
+/*
+ *  Copyright (c) 2016 P.N.Alekseev <pnaleks@gmail.com>
+ */
 package pnapp.tools.ping;
 
 import android.content.SharedPreferences;
@@ -19,10 +22,6 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
-/**
- * @author P.N. Alekseev
- * @author pnaleks@gmail.com
- */
 public class DrawerFragment extends Fragment {
     /** Show the drawer on launch until the user manually expands it */
     private static final String PREF_USER_LEARNED_DRAWER = "navigation_drawer_learned";

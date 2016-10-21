@@ -1,3 +1,6 @@
+/*
+ *  Copyright (c) 2016 P.N.Alekseev <pnaleks@gmail.com>
+ */
 package pnapp.tools.ping;
 
 import android.content.SharedPreferences;
@@ -12,10 +15,6 @@ import android.widget.ListView;
 
 import java.util.ArrayList;
 
-/**
- * @author P.N. Alekseev
- * @author pnaleks@gmail.com
- */
 public class ConsoleFragment extends Fragment {
     public static final String PREF_BUFFER_SIZE = "pref_buffer_size";
     public static final String PREF_VERBOSE     = "pref_verbose_output";

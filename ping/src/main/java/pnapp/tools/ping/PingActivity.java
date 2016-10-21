@@ -1,3 +1,6 @@
+/*
+ *  Copyright (c) 2016 P.N.Alekseev <pnaleks@gmail.com>
+ */
 package pnapp.tools.ping;
 
 import android.annotation.SuppressLint;
@@ -32,10 +35,6 @@ import java.util.HashSet;
 import pnapp.tools.ping.Pinger.OnPingListener;
 import pnapp.tools.ping.Resolver.OnResolvedListener;
 
-/**
- * @author P.N. Alekseev
- * @author pnaleks@gmail.com
- */
 public class PingActivity extends AppCompatActivity implements
         DrawerFragment.OnDrawerItemSelectedListener,
         CommandEntry.Callback,
@@ -354,11 +353,11 @@ public class PingActivity extends AppCompatActivity implements
         mCancelled = false;
         StatisticFragment fragment = StatisticFragment.getInstance();
         if ( Resolver.isHostAddress(host) ) {
-            fragment.setHostName(null);
-            fragment.setHostAddress(host);
+            fragment.setHostName(null, true);
+            fragment.setHostAddress(host, false);
         } else {
-            fragment.setHostName(host);
-            fragment.setHostAddress(null);
+            fragment.setHostName(host, false);
+            fragment.setHostAddress(null, true);
         }
         mResolver.resolve(host, mResolveAddress);
         mEntryView.toggleAction();

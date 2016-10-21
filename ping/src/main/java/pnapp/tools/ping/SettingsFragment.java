@@ -1,3 +1,6 @@
+/*
+ *  Copyright (c) 2016 P.N.Alekseev <pnaleks@gmail.com>
+ */
 package pnapp.tools.ping;
 
 import android.content.Context;
@@ -10,10 +13,6 @@ import android.preference.PreferenceFragment;
 
 import java.util.Locale;
 
-/**
- * @author P.N.Alekseev
- * @author pnaleks@gmail.com
- */
 public class SettingsFragment extends PreferenceFragment implements OnSharedPreferenceChangeListener {
     public static String getOptions(SharedPreferences prefs, Pinger pinger) {
         if ( prefs.getBoolean(PingActivity.PREF_ENABLE_OPTIONS,false) ) {

@@ -1,3 +1,6 @@
+/*
+ *  Copyright (c) 2016 P.N.Alekseev <pnaleks@gmail.com>
+ */
 package pnapp.tools.ping;
 
 import android.content.Context;
@@ -10,42 +13,38 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-/**
- * @author P.N. Alekseev
- * @author pnaleks@gmail.com
- */
-public class DrawerAdapter extends BaseAdapter {
+class DrawerAdapter extends BaseAdapter {
 	private static final int[] LAYOUTS = {
 		R.layout.drawer_group,
 		R.layout.drawer_item,
 		R.layout.drawer_child
 	};
-	public static final int TYPE_GROUP = 0;
-	public static final int TYPE_ITEM  = 1;
-	public static final int TYPE_CHILD = 2;
+	static final int TYPE_GROUP = 0;
+	static final int TYPE_ITEM  = 1;
+	static final int TYPE_CHILD = 2;
 	
-	public class Item {
-		public int mType;
-        public int mNameId = 0;
-        public int mIconId = 0;
+	class Item {
+		int mType;
+        int mNameId = 0;
+        int mIconId = 0;
 		// int mItemId = 0;
-        public String mName;
-        public String mDescription;
+        String mName;
+        String mDescription;
 		
-		public Item(int type, int nameResId) {
+		Item(int type, int nameResId) {
 			mType   = type;
 			mNameId = nameResId;
 			mName   = null;
 		}
 
-		public Item(int type, String name) {
+		Item(int type, String name) {
 			mType   = type;
 			mNameId = 0;
 			mName   = name;
 		}
 	}
 	
-	ArrayList<Item> mItems = new ArrayList<>();
+	private ArrayList<Item> mItems = new ArrayList<>();
 
 	@Override public boolean areAllItemsEnabled() { return false; }
 	@Override public int getItemViewType(int position) { return mItems.get(position).mType; }
@@ -82,7 +81,7 @@ public class DrawerAdapter extends BaseAdapter {
 		return v;
 	}
 	
-	public void addGroup(int nameId, int iconId) {
+	void addGroup(int nameId, int iconId) {
 		int i = 0;
 		for ( Item item : mItems ) {
 			if ( item.mType == TYPE_ITEM ) break;
@@ -94,7 +93,7 @@ public class DrawerAdapter extends BaseAdapter {
 		notifyDataSetChanged();
 	}
 
-    public boolean exists(int groupId) {
+    boolean exists(int groupId) {
         for( Item item : mItems ) {
             if ( item.mType == TYPE_GROUP && item.mNameId == groupId ) return true;
         }
@@ -116,8 +115,8 @@ public class DrawerAdapter extends BaseAdapter {
 	}
 	*/
 	
-	public boolean addChild(int groupId, String name) { return addChild(groupId, name, null); }
-	public boolean addChild(int groupId, String name, String description) {
+	boolean addChild(int groupId, String name) { return addChild(groupId, name, null); }
+	boolean addChild(int groupId, String name, String description) {
 		int i = 0;
 		boolean inside = false;
 		for( Item item : mItems ) {
@@ -152,7 +151,7 @@ public class DrawerAdapter extends BaseAdapter {
         return false;
 	}
 
-	public boolean removeChild(int groupId, String name) {
+	boolean removeChild(int groupId, String name) {
 		int i = 0;
 		boolean inside = false;
 		for( Item item : mItems ) {
@@ -173,7 +172,7 @@ public class DrawerAdapter extends BaseAdapter {
 		return false;
 	}
 
-    public boolean removeChildren(int groupId) {
+    boolean removeChildren(int groupId) {
         int i = 0;
         for( Item item : mItems ) {
             if ( item.mType == TYPE_GROUP && item.mNameId == groupId ) {

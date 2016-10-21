@@ -1,3 +1,6 @@
+/*
+ *  Copyright (c) 2016 P.N.Alekseev <pnaleks@gmail.com>
+ */
 package pnapp.tools.ping;
 
 import android.content.Context;
@@ -25,18 +28,15 @@ import java.util.Locale;
  * В последнем случае шкала задается строкой содержащей абсолютные значения для каждого положения шкалы и шаг шкалы в
  * каждом интервале заданных значений. Например, строка {@code "-1 0 i3 10 i5 20"} задает шкалу со значениями
  * (-1 0 3 6 9 10 15 20).
- *
- * @author P.N. Alekseev
- * @author pnaleks@gmail.com
  */
 public class SeekBarPreference extends DialogPreference implements SeekBar.OnSeekBarChangeListener {
-    public static final float DEFAULT_VALUE = 0;
-    public static final float DEFAULT_MIN = 0;
-    public static final float DEFAULT_MAX = 100;
-    public static final float DEFAULT_RESOLUTION = 1;
+    private static final float DEFAULT_VALUE = 0;
+    private static final float DEFAULT_MIN = 0;
+    private static final float DEFAULT_MAX = 100;
+    private static final float DEFAULT_RESOLUTION = 1;
 
-	SeekBar  mSeekBar  = null;
-	TextView mTextView = null;
+	private SeekBar  mSeekBar  = null;
+	private TextView mTextView = null;
 
     /** Строка формата для {@link String#format(String, Object...)} содержащая единственную спецификацию 'f' */
 	private String mStrFormat;
@@ -46,16 +46,16 @@ public class SeekBarPreference extends DialogPreference implements SeekBar.OnSee
     private String mStrMax;
 
 
-    float mMin = DEFAULT_MIN;
-    float mMax = DEFAULT_MAX;
+    private float mMin = DEFAULT_MIN;
+    private float mMax = DEFAULT_MAX;
 
-    float mResolution = DEFAULT_RESOLUTION;
-	float mValue = DEFAULT_VALUE;
+    private float mResolution = DEFAULT_RESOLUTION;
+	private float mValue = DEFAULT_VALUE;
 
-    int mSeekBarMax;
-    int mSeekBarShift;
+    private int mSeekBarMax;
+    private int mSeekBarShift;
 
-    ArrayList<Float> mScale;
+    private ArrayList<Float> mScale;
 
 	public SeekBarPreference(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -119,7 +119,7 @@ public class SeekBarPreference extends DialogPreference implements SeekBar.OnSee
 
 	}
 
-    protected String setText() {
+    private String setText() {
         String res;
         if( mValue <= mMin && mStrMin != null ) res = mStrMin;
         else if ( mValue >= mMax && mStrMax != null ) res = mStrMax;
@@ -128,7 +128,7 @@ public class SeekBarPreference extends DialogPreference implements SeekBar.OnSee
         return res;
     }
 
-    protected int getProgress(float value) {
+    private int getProgress(float value) {
         if ( mScale != null ) {
             int cnt = 0;
             for ( Float item : mScale ) {
@@ -140,7 +140,7 @@ public class SeekBarPreference extends DialogPreference implements SeekBar.OnSee
         return (int)(value/mResolution) - mSeekBarShift;
     }
 
-    protected float getValue(int progress) {
+    private float getValue(int progress) {
         if ( mScale != null ) {
             return mScale.get(progress);
         }

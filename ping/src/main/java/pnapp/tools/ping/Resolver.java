@@ -1,3 +1,6 @@
+/*
+ *  Copyright (c) 2016 P.N.Alekseev <pnaleks@gmail.com>
+ */
 package pnapp.tools.ping;
 
 import java.net.InetAddress;
@@ -8,22 +11,18 @@ import android.os.AsyncTask;
 
 /**
  * Асинхронное определение имени и адреса интернет соединений
- *
- * @author P.N.Alekseev
- * @author pnaleks@gmail.com
- * @since 2014-10-30
  */
-public class Resolver {
-	static final Pattern patHostAddress = Pattern.compile("^\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}$");
+class Resolver {
+	private static final Pattern patHostAddress = Pattern.compile("^\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}$");
 	
 	/** Задача еще не выполнялась */
-	public static final int STATUS_PENDING  = 0;
+	static final int STATUS_PENDING  = 0;
 	/** Задача активна */
-	public static final int STATUS_RUNNING  = 1;
+	static final int STATUS_RUNNING  = 1;
 	/** Задача завершена, hostName определить не удалось */
-	public static final int STATUS_UNKNOWN  = 2;
+	static final int STATUS_UNKNOWN  = 2;
 	/** Задача успешно завершена */
-	public static final int STATUS_FINISHED = 3;
+	static final int STATUS_FINISHED = 3;
 
 	/** Адрес */
 	private InetAddress mAddress;
@@ -43,13 +42,13 @@ public class Resolver {
     private boolean mReverse;
 
 	/** Интерфейс для обработки результатов команды */
-	public interface OnResolvedListener { void onResolved(Resolver resolver); }
+	interface OnResolvedListener { void onResolved(Resolver resolver); }
 	
 	/**
 	 * Установка обработчика
 	 * @param listener - новый обработчик
 	 */
-	public void setOnResolvedListener( OnResolvedListener listener ) {
+	void setOnResolvedListener( OnResolvedListener listener ) {
 		mListener = listener;
 	}
 
@@ -59,7 +58,7 @@ public class Resolver {
      * @param reverse - если истина, IP-дрес будет использован для определения имени
 	 * @return Возвращает ложь в случае если предыдущая операция не завершена и истину при успешном запуске процедуры
 	 */
-	public boolean resolve(String host, boolean reverse) {
+	boolean resolve(String host, boolean reverse) {
 		if ( mResolver != null && mResolver.getStatus() == AsyncTask.Status.RUNNING ) {
 			return false;
 		}
@@ -81,15 +80,15 @@ public class Resolver {
 	 * <li>{@link #STATUS_FINISHED}</li>
 	 * </ul>
 	 */
-	public int getStatus() {
+	int getStatus() {
 		return mStatus;
 	}
 	
-	public boolean isRunning() {
+	boolean isRunning() {
 		return mStatus == STATUS_RUNNING;
 	}
 	
-	public String getErrString() {
+	String getErrString() {
 		return mErrString;
 	}
 	
@@ -97,7 +96,7 @@ public class Resolver {
 	 * @return Возвращает имя или null если операция не закончена или если имя компьютера определить не удалось.
      * Используйте {@link #getStatus()} чтобы определить причину
 	 */
-	public String getHostName() {
+	String getHostName() {
         if ( mStatus != STATUS_FINISHED ) return null;
         if ( !mReverse ) {
             if ( isHostAddress(mSrcString) ) return null;
@@ -110,7 +109,7 @@ public class Resolver {
 	 * @return Возвращает адрес или null если операция не закончена или если имя компьютера определить не удалось.
      * Используйте {@link #getStatus()} чтобы определить причину
 	 */
-	public String getHostAddress() {
+	String getHostAddress() {
 		if ( mStatus == STATUS_FINISHED ) return mAddress.getHostAddress();
 		if ( mStatus == STATUS_UNKNOWN && isHostAddress(mSrcString) ) return mSrcString;
 		return null;
@@ -120,7 +119,7 @@ public class Resolver {
 	 * @return Возвращает {@link InetAddress} или null если операция не закончена или если имя компьютера определить не удалось.
      * Используйте {@link #getStatus()} чтобы определить причину
 	 */
-	public InetAddress getInetAddress() {
+	InetAddress getInetAddress() {
 		return mStatus == STATUS_FINISHED ? mAddress : null;
 	}
 	
@@ -129,7 +128,7 @@ public class Resolver {
 	 * @param host - строка для анализа
 	 * @return Истину, если строка содержит корректный IP-адрес
 	 */
-	static public boolean isHostAddress(String host) {
+	static boolean isHostAddress(String host) {
 		return patHostAddress.matcher(host).matches();
 	}
 	
@@ -145,6 +144,13 @@ public class Resolver {
 		
 		@Override
 		protected InetAddress doInBackground(String... host) {
+			synchronized (this) {
+				try {
+					wait(1000);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+			}
 			InetAddress address = null;
 			try {
 				address = InetAddress.getByName(host[0]);

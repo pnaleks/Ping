@@ -16,6 +16,10 @@
             android:id="@+id/host_name"
             style="@style/statistic_fragment_value" />
 
+        <android.support.v4.widget.ContentLoadingProgressBar
+            android:id="@+id/progress_reverse"
+            style="@style/statisticsFragmentProgressBar"/>
+
     </FrameLayout>
 
     <FrameLayout style="@style/statistic_fragment_frame_layout" >
@@ -27,6 +31,10 @@
         <TextView
             android:id="@+id/ip_address"
             style="@style/statistic_fragment_value" />
+
+        <android.support.v4.widget.ContentLoadingProgressBar
+            android:id="@+id/progress_resolve"
+            style="@style/statisticsFragmentProgressBar"/>
 
     </FrameLayout>
 

@@ -1,3 +1,6 @@
+/*
+ *  Copyright (c) 2016 P.N.Alekseev <pnaleks@gmail.com>
+ */
 package pnapp.tools.ping;
 
 import android.content.Context;
@@ -30,10 +33,6 @@ import java.util.Set;
  *     <li>кнопка слева - play/stop</li>
  *     <li>кнопка справа - clear/toggle bookmark</li>
  * </ul>
- *
- *
- * @author P.N. Alekseev
- * @author pnaleks@gmail.com
  */
 public class CommandEntry extends FrameLayout {
 	private ImageButton mButtonLeft;

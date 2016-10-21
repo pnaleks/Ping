@@ -1,3 +1,6 @@
+/*
+ *  Copyright (c) 2016 P.N.Alekseev <pnaleks@gmail.com>
+ */
 package pnapp.tools.ping;
 
 import android.content.Context;
@@ -8,11 +11,7 @@ import java.util.regex.Pattern;
 
 import pnapp.tools.ping.Pinger.OnPingListener;
 
-/**
- * @author P.N. Alekseev
- * @author pnaleks@gmail.com
- */
-public class NetworkScanner implements OnPingListener {
+class NetworkScanner implements OnPingListener {
 	/** Шаблон строки команды ping с просроченным TL */
 	private static final Pattern pTtlExceeded = Pattern.compile("From (\\d{1,3})\\.(\\d{1,3})\\.(\\d{1,3})\\.(\\d{1,3})\\D.*Time to live exceeded");
 	
@@ -30,7 +29,7 @@ public class NetworkScanner implements OnPingListener {
 
     private static NetworkScanner mInstance;
 
-    public static NetworkScanner getInstance(Context context) {
+    static NetworkScanner getInstance(Context context) {
         if ( mInstance == null ) mInstance = new NetworkScanner();
         mInstance.mContext = context;
         return mInstance;
@@ -42,7 +41,7 @@ public class NetworkScanner implements OnPingListener {
         mReady = true;
 	}
 	
-	public boolean scan() {
+	boolean scan() {
         if ( !mReady ) return false;
         mTTL = 1;
         mReady = false;
