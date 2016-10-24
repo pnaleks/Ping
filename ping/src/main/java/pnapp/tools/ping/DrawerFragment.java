@@ -57,7 +57,8 @@ public class DrawerFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        ListView v = (ListView) inflater.inflate(R.layout.drawer_fragment, container, false);
+        View view = inflater.inflate(R.layout.drawer_fragment, container, false);
+        ListView v = (ListView) view.findViewById(R.id.list);
         v.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -65,7 +66,7 @@ public class DrawerFragment extends Fragment {
             }
         });
         v.setAdapter( mAdapter );
-        return v;
+        return view;
     }
 
     /**

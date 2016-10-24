@@ -14,7 +14,6 @@ import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
-import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AutoCompleteTextView;
 import android.widget.Filterable;
@@ -128,10 +127,10 @@ public class CommandEntry extends FrameLayout {
 		isRunning = !isRunning;
 		if (isRunning) {
 			mButtonLeft.setImageDrawable(mDrawableStop);
-			mTextView.setImeOptions(EditorInfo.IME_ACTION_DONE);
+			mTextView.setEnabled(false);
 		} else {
 			mButtonLeft.setImageDrawable(mDrawablePlay);
-			mTextView.setImeOptions(EditorInfo.IME_ACTION_GO);
+			mTextView.setEnabled(true);
 		}
 	}
 	
@@ -159,8 +158,8 @@ public class CommandEntry extends FrameLayout {
 			}
 		}
 	}
-	
-	OnFocusChangeListener mOnFocusChangeListener = new OnFocusChangeListener() {
+
+    OnFocusChangeListener mOnFocusChangeListener = new OnFocusChangeListener() {
 		@Override
 		public void onFocusChange(View v, boolean hasFocus) {
 			CommandEntry.this.hasFocus = hasFocus;
@@ -183,7 +182,7 @@ public class CommandEntry extends FrameLayout {
 		@Override
 		public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
             v.clearFocus();
-			if ( !isRunning) { onLeftButton(); }
+			if (!isRunning) { onLeftButton(); }
 			return true;
 		}
 	};

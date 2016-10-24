@@ -14,88 +14,95 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 class DrawerAdapter extends BaseAdapter {
-	private static final int[] LAYOUTS = {
-		R.layout.drawer_group,
-		R.layout.drawer_item,
-		R.layout.drawer_child
-	};
-	static final int TYPE_GROUP = 0;
-	static final int TYPE_ITEM  = 1;
-	static final int TYPE_CHILD = 2;
+	enum ITEM_TYPE {
+        HEADER(R.layout.drawer_header),
+        ITEM(R.layout.drawer_item),
+        GROUP(R.layout.drawer_group),
+        CHILD(R.layout.drawer_child);
+
+        private int layoutResId;
+
+        ITEM_TYPE(int layoutResId) { this.layoutResId = layoutResId; }
+    }
 	
 	class Item {
-		int mType;
-        int mNameId = 0;
-        int mIconId = 0;
-		// int mItemId = 0;
-        String mName;
-        String mDescription;
-		
-		Item(int type, int nameResId) {
-			mType   = type;
-			mNameId = nameResId;
-			mName   = null;
-		}
+		ITEM_TYPE type;
+        int id = 0;
+        int iconId = 0;
+        String name;
+        String description;
 
-		Item(int type, String name) {
-			mType   = type;
-			mNameId = 0;
-			mName   = name;
-		}
+        Item(ITEM_TYPE type) { this.type = type; }
+
+        void bind(View view) {
+            TextView nameView = (TextView) view.findViewById(android.R.id.text1);
+            if (nameView != null) {
+                if (iconId != 0) {
+                    ImageView imageView = (ImageView) view.findViewById(android.R.id.icon);
+                    if (imageView == null)
+                        nameView.setCompoundDrawablesWithIntrinsicBounds(iconId, 0, 0, 0);
+                    else
+                        imageView.setImageResource(iconId);
+                }
+
+                if (name == null && id > 0) name = view.getResources().getString(id);
+                if (name != null) nameView.setText(name);
+
+                TextView descriptionView = (TextView) view.findViewById(android.R.id.text2);
+                if (descriptionView != null) {
+                    if (description == null) {
+                        descriptionView.setVisibility(View.GONE);
+                    } else {
+                        descriptionView.setText(description);
+                        descriptionView.setVisibility(View.VISIBLE);
+                    }
+                }
+            }
+        }
+
 	}
 	
 	private ArrayList<Item> mItems = new ArrayList<>();
 
 	@Override public boolean areAllItemsEnabled() { return false; }
-	@Override public int getItemViewType(int position) { return mItems.get(position).mType; }
-	@Override public int getViewTypeCount() { return LAYOUTS.length; }
+	@Override public int getItemViewType(int position) { return mItems.get(position).type.ordinal(); }
+	@Override public int getViewTypeCount() { return ITEM_TYPE.values().length; }
 	@Override public int getCount() { return mItems.size(); }
 	@Override public boolean hasStableIds() { return false; }
 	@Override public boolean isEmpty() { return mItems.isEmpty(); }
-	@Override public boolean isEnabled(int position) { return mItems.get(position).mType > 0; }
+	@Override public boolean isEnabled(int position) { return mItems.get(position).type != ITEM_TYPE.GROUP; }
 	@Override public Object getItem(int position) { return mItems.get(position); }
 	@Override public long getItemId(int position) { return 0; }
 
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 		LayoutInflater inflater = (LayoutInflater) parent.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-		Item i = mItems.get(position);
+		Item item = mItems.get(position);
 		
-		View v = convertView;
-		if ( v == null ) v = inflater.inflate(LAYOUTS[i.mType], parent, false);
-		
-		TextView tv = (TextView) v.findViewById(android.R.id.text1); 
-		if ( i.mName == null ) tv.setText(i.mNameId);
-		else                   tv.setText(i.mName);
-		
-		if ( i.mIconId > 0 ) {
-			ImageView iv = (ImageView) v.findViewById(android.R.id.icon);
-			if (iv != null) iv.setImageResource(i.mIconId);
-		}
-		
-		tv = (TextView) v.findViewById(android.R.id.text2);
-		if (tv != null) {
-			if ( i.mDescription == null ) tv.setVisibility(View.GONE);
-			else tv.setText(i.mDescription);
-		}
-		return v;
+		View view = convertView;
+		if ( view == null ) view = inflater.inflate(item.type.layoutResId, parent, false);
+
+        item.bind(view);
+
+		return view;
 	}
 	
 	void addGroup(int nameId, int iconId) {
 		int i = 0;
 		for ( Item item : mItems ) {
-			if ( item.mType == TYPE_ITEM ) break;
+			if ( item.type == ITEM_TYPE.ITEM ) break;
 			i++;
 		}
-		Item item = new Item(TYPE_GROUP, nameId);
-		item.mIconId = iconId;
+		Item item = new Item(ITEM_TYPE.GROUP);
+        item.id = nameId;
+		item.iconId = iconId;
 		mItems.add(i, item);
 		notifyDataSetChanged();
 	}
 
     boolean exists(int groupId) {
         for( Item item : mItems ) {
-            if ( item.mType == TYPE_GROUP && item.mNameId == groupId ) return true;
+            if ( item.type == ITEM_TYPE.GROUP && item.id == groupId ) return true;
         }
         return false;
     }
@@ -121,29 +128,30 @@ class DrawerAdapter extends BaseAdapter {
 		boolean inside = false;
 		for( Item item : mItems ) {
 			if ( inside ) {
-                if (  item.mType == TYPE_CHILD && name.equalsIgnoreCase(item.mName) ) { // Do not duplicate items!!!
+                if (  item.type == ITEM_TYPE.CHILD && name.equalsIgnoreCase(item.name) ) { // Do not duplicate items!!!
                     if ( description != null ) {
-                        if (item.mDescription == null) {
-                            item.mDescription = description;
+                        if (item.description == null) {
+                            item.description = description;
                             notifyDataSetChanged();
-                        } else if ( !item.mDescription.contains(description) ) {
-                            item.mDescription += ", " + description;
+                        } else if ( !item.description.contains(description) ) {
+                            item.description += ", " + description;
                             notifyDataSetChanged();
                         }
                     }
                     return false;
                 }
-				if (  item.mType != TYPE_CHILD || name.compareToIgnoreCase(item.mName) < 0 ) break;
+				if (  item.type != ITEM_TYPE.CHILD || name.compareToIgnoreCase(item.name) < 0 ) break;
 			} else {
-				if ( item.mType == TYPE_GROUP && item.mNameId == groupId ) {
+				if ( item.type == ITEM_TYPE.GROUP && item.id == groupId ) {
 					inside = true;
 				}
 			}
 			i++;
 		}
         if ( inside ) {
-            Item child = new Item(TYPE_CHILD, name);
-            child.mDescription = description;
+            Item child = new Item(ITEM_TYPE.CHILD);
+            child.name = name;
+            child.description = description;
             mItems.add(i, child);
             notifyDataSetChanged();
             return true;
@@ -156,14 +164,14 @@ class DrawerAdapter extends BaseAdapter {
 		boolean inside = false;
 		for( Item item : mItems ) {
 			if ( inside ) {
-				if ( item.mType != TYPE_CHILD ) break;
-				if ( name.equals(item.mName) ) {
+				if ( item.type != ITEM_TYPE.CHILD ) break;
+				if ( name.equals(item.name) ) {
 					mItems.remove(i);
 					notifyDataSetChanged();
 					return true;
 				}
 			} else {
-				if ( item.mType == TYPE_GROUP && item.mNameId == groupId ) {
+				if ( item.type == ITEM_TYPE.GROUP && item.id == groupId ) {
 					inside = true;
 				}
 			}
@@ -175,9 +183,9 @@ class DrawerAdapter extends BaseAdapter {
     boolean removeChildren(int groupId) {
         int i = 0;
         for( Item item : mItems ) {
-            if ( item.mType == TYPE_GROUP && item.mNameId == groupId ) {
+            if ( item.type == ITEM_TYPE.GROUP && item.id == groupId ) {
                 i++;
-                while( mItems.size() > i && mItems.get(i).mType == TYPE_CHILD ) {
+                while( mItems.size() > i && mItems.get(i).type == ITEM_TYPE.CHILD ) {
                     mItems.remove(i);
                 }
                 notifyDataSetChanged();
@@ -186,6 +194,18 @@ class DrawerAdapter extends BaseAdapter {
             i++;
         }
         return false;
+    }
+
+    void setHeader(String title) {
+        Item header = (mItems.size() > 0) ? mItems.get(0) : null;
+        if (header == null || header.type != ITEM_TYPE.HEADER) {
+            header =  new Item(ITEM_TYPE.HEADER);
+            header.id = R.string.app_description;
+            mItems.add(0, header);
+        }
+
+        header.name = title;
+        notifyDataSetChanged();
     }
 
     /*

@@ -13,7 +13,6 @@ import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.os.Vibrator;
 import android.preference.PreferenceManager;
-import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -41,6 +40,9 @@ public class PingActivity extends AppCompatActivity implements
         NetworkScanner.OnNetworkNodeFoundListener,
         OnPingListener,
 		OnResolvedListener {
+
+    private static final String ARG_CONSOLE_FRAGMENT = "console_fragment";
+    private static final String ARG_STATISTIC_FRAGMENT = "statistic_fragment";
 
     // Имена параметров для сохранения состояния
 	public static final String PREF_SELECTED_FRAGMENT = "pref_selected_fragment";
@@ -87,12 +89,14 @@ public class PingActivity extends AppCompatActivity implements
 	private static Pinger mPinger = new Pinger();
 	
 	private boolean mCancelled;
-	private String mHost;
     private String mOptions = "";
 
     private MediaPlayer mMediaPlayer;
     /** Если истина - вибрировать при отклике */
     private boolean vibrate;
+
+    private StatisticFragment statisticFragment;
+    private ConsoleFragment consoleFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -119,6 +123,17 @@ public class PingActivity extends AppCompatActivity implements
         // Set up the drawer.
         drawer.setUp( R.id.navigation_drawer, (DrawerLayout) findViewById(R.id.drawer_layout) );
         mAdapter = drawer.getAdapter();
+        mAdapter.setHeader(null);
+
+
+        if (savedInstanceState == null) {
+            statisticFragment = new StatisticFragment();
+            consoleFragment = new ConsoleFragment();
+        } else {
+            statisticFragment = (StatisticFragment) fm.getFragment(savedInstanceState,ARG_STATISTIC_FRAGMENT);
+            consoleFragment = (ConsoleFragment) fm.getFragment(savedInstanceState,ARG_CONSOLE_FRAGMENT);
+        }
+
 
         View v = findViewById(R.id.container);
         if ( v != null ) {
@@ -127,8 +142,8 @@ public class PingActivity extends AppCompatActivity implements
                 @Override
                 public Fragment getItem(int position) {
                     switch (position) {
-                        case 0: return StatisticFragment.getInstance();
-                        case 1: return ConsoleFragment.getInstance();
+                        case 0: return statisticFragment;
+                        case 1: return consoleFragment;
                     }
                     return null;
                 }
@@ -145,12 +160,17 @@ public class PingActivity extends AppCompatActivity implements
                 public void onPageSelected(int position) { updatePageIndicator(position); }
             });
             mViewPager.setCurrentItem(page);
+
             updatePageIndicator(page);
         } else {
             if ( savedInstanceState == null ) {
-                fm.beginTransaction().add(R.id.container1, StatisticFragment.getInstance()).commit();
-                fm.beginTransaction().add(R.id.container2, ConsoleFragment.getInstance()).commit();
+                fm.beginTransaction().add(R.id.container1, statisticFragment).commit();
+                fm.beginTransaction().add(R.id.container2, consoleFragment).commit();
             }
+        }
+
+        if (savedInstanceState != null) {
+            statisticFragment.put(mPinger);
         }
 
         if ( !mAdapter.exists(R.string.drawer_group_bookmarks) )
@@ -220,21 +240,24 @@ public class PingActivity extends AppCompatActivity implements
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putString("host", mHost);
-    }
-
-    @Override
-    protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
-        super.onRestoreInstanceState(savedInstanceState);
-        StatisticFragment.getInstance().put(mPinger);
-        mHost = savedInstanceState.getString("host");
+        FragmentManager fm = getSupportFragmentManager();
+        fm.putFragment(outState,ARG_STATISTIC_FRAGMENT, statisticFragment);
+        fm.putFragment(outState,ARG_CONSOLE_FRAGMENT, consoleFragment);
     }
 
     @Override
     public void onDrawerItemSelected(DrawerAdapter.Item item) {
-		if ( item.mType == DrawerAdapter.TYPE_CHILD ) {
-			mEntryView.setText(item.mName);
+		if (item.type == DrawerAdapter.ITEM_TYPE.CHILD) {
+            if (mPinger.isRunning()) {
+                mCancelled = true;
+                mPinger.cancel();
+            }
+			mEntryView.setText(item.name);
+            return;
 		}
+        if (item.type == DrawerAdapter.ITEM_TYPE.HEADER) {
+            Toast.makeText(this, R.string.app_about, Toast.LENGTH_SHORT).show();
+        }
     }
 
     @Override
@@ -242,8 +265,8 @@ public class PingActivity extends AppCompatActivity implements
         if( closeDrawer() ) return;
         if ( mPinger.isRunning() ) mPinger.cancel();
         mPinger.resetCounters();
-        StatisticFragment.getInstance().clear();
-        ConsoleFragment.getInstance().clear();
+        statisticFragment.clear();
+        consoleFragment.clear();
         super.onBackPressed();
     }
 
@@ -286,10 +309,10 @@ public class PingActivity extends AppCompatActivity implements
                 return true;
             case R.id.action_reset:
                 if ( mPinger != null ) mPinger.resetCounters();
-                StatisticFragment.getInstance().put(mPinger);
+                statisticFragment.put(mPinger);
                 return true;
             case R.id.action_clear_console:
-                ConsoleFragment.getInstance().clear();
+                consoleFragment.clear();
                 return true;
             case R.id.action_man:
                 Intent intent = new Intent(this, SettingsActivity.class);
@@ -306,19 +329,21 @@ public class PingActivity extends AppCompatActivity implements
 
     @Override
 	public void onResolved(Resolver resolver) {
-		ConsoleFragment.getInstance().put(resolver);
-        StatisticFragment.getInstance().put(resolver);
+		consoleFragment.put(resolver);
+        statisticFragment.put(resolver);
+        if (mPinger.isRunning()) return;
 		if (mCancelled) {
 			mEntryView.toggleAction();
 		} else {
-			mHost = resolver.getHostName();
-			if ( mHost != null ) {
-				if ( mAutoCompleteSet.add(mHost) ) mAutoCompleteAdapter.add(mHost);
+            String host;
+			host = resolver.getHostName();
+			if ( host != null ) {
+				if ( mAutoCompleteSet.add(host) ) mAutoCompleteAdapter.add(host);
 			}
-			mHost = resolver.getHostAddress();
-			if ( mHost != null ) {
-				if ( mAutoCompleteSet.add(mHost) ) mAutoCompleteAdapter.add(mHost);
-				mPinger.ping(mOptions ,mHost);
+			host = resolver.getHostAddress();
+			if ( host != null ) {
+				if ( mAutoCompleteSet.add(host) ) mAutoCompleteAdapter.add(host);
+				mPinger.ping(mOptions ,host);
 			} else {
                 mEntryView.toggleAction();
             }
@@ -327,8 +352,8 @@ public class PingActivity extends AppCompatActivity implements
 
 	@Override
 	public void onPing(Pinger pinger) {
-        ConsoleFragment.getInstance().put(pinger);
-        StatisticFragment.getInstance().put(pinger);
+        consoleFragment.put(pinger);
+        statisticFragment.put(pinger);
         if( pinger.getStatus() == Pinger.STATUS_RESPONSE ) {
             if( mMediaPlayer != null ) {
                 if (mMediaPlayer.isPlaying()) mMediaPlayer.seekTo(0);
@@ -347,19 +372,24 @@ public class PingActivity extends AppCompatActivity implements
     public void onActionPlay(String host) {
         if ( !mInputText.equals(host)) {
             mPinger.resetCounters();
-            StatisticFragment.getInstance().put(mPinger);
+            statisticFragment.put(mPinger);
         }
         mInputText = host;
         mCancelled = false;
-        StatisticFragment fragment = StatisticFragment.getInstance();
         if ( Resolver.isHostAddress(host) ) {
-            fragment.setHostName(null, true);
-            fragment.setHostAddress(host, false);
+            mPinger.ping(mOptions, host); // TODO: Добавить в автокомплит
+            if (mResolveAddress) {
+                mResolver.resolve(host, true);
+                statisticFragment.setHostName(null, true);
+            } else {
+                statisticFragment.setHostName(null, false);
+            }
+            statisticFragment.setHostAddress(host, false);
         } else {
-            fragment.setHostName(host, false);
-            fragment.setHostAddress(null, true);
+            statisticFragment.setHostName(host, false);
+            statisticFragment.setHostAddress(null, true);
+            mResolver.resolve(host, false);
         }
-        mResolver.resolve(host, mResolveAddress);
         mEntryView.toggleAction();
     }
 

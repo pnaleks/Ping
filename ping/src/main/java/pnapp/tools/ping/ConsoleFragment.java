@@ -30,14 +30,6 @@ public class ConsoleFragment extends Fragment {
     /** Флаг включения подробного вывода */
     protected boolean mVerbose;
 
-    private static ConsoleFragment mInstance;
-    public ConsoleFragment() { mInstance = this; }
-    public static ConsoleFragment getInstance() {
-        if ( mInstance != null ) return mInstance;
-        return new ConsoleFragment();
-    }
-
-
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View v = inflater.inflate(R.layout.console_fragment, container, false);

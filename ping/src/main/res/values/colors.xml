@@ -1,8 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="primary_text">#ffffffff</color>
-    <color name="hint_text">#80ffffff</color>
-
     <color name="ping_color_dark">#ffff5d42</color>
     <color name="ping_color_light">#ffffe0b0</color>
     <color name="ping_color_text">#ffffffff</color>

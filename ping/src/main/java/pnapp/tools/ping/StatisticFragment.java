@@ -14,6 +14,10 @@ import android.widget.TextView;
 import java.util.Locale;
 
 public class StatisticFragment extends Fragment {
+    private static final String ARG_HOST_NAME = "host_name";
+    private static final String ARG_HOST_ADDRESS = "host_address";
+    private static final String ARG_VALUES = "values";
+
     private static final String STR_UNKNOWN = "—";
  	private View mView;
 
@@ -24,27 +28,29 @@ public class StatisticFragment extends Fragment {
     public String mHostName = "";
     public String mHostAddress = "";
 
-    private Pinger mLastPinger;
-
-    private static StatisticFragment mInstance = null;
-    public StatisticFragment() { mInstance = this; }
-    public static StatisticFragment getInstance() {
-        if ( mInstance != null ) return mInstance;
-        return new StatisticFragment();
-    }
+    private String[] mValues;
+    private TextView[] mValueViews;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		mView = inflater.inflate(R.layout.statictic_fragment, container, false);
 
+        mValueViews = new TextView[] {
+                (TextView) mView.findViewById(R.id.last_value),
+                (TextView) mView.findViewById(R.id.count_value),
+                (TextView) mView.findViewById(R.id.mean_value),
+                (TextView) mView.findViewById(R.id.max_value)
+        };
+
         if ( savedInstanceState != null ) {
-            mHostName = savedInstanceState.getString("mHostName");
-            mHostAddress = savedInstanceState.getString("mHostAddress");
+            mHostName = savedInstanceState.getString(ARG_HOST_NAME);
+            mHostAddress = savedInstanceState.getString(ARG_HOST_ADDRESS);
+            mValues = savedInstanceState.getStringArray(ARG_VALUES);
         }
 
         if (mHostName != null) setText(R.id.host_name, mHostName);
         if (mHostAddress != null) setText(R.id.ip_address, mHostAddress);
-        if (mLastPinger != null) put(mLastPinger);
+        if (mValues != null) updateValueViews();
 
         mResolveProgressBar = (ContentLoadingProgressBar) mView.findViewById(R.id.progress_resolve);
         mReverseProgressBar = (ContentLoadingProgressBar) mView.findViewById(R.id.progress_reverse);
@@ -52,14 +58,17 @@ public class StatisticFragment extends Fragment {
         mResolveProgressBar.hide();
         mReverseProgressBar.hide();
 
+
+
 		return mView;
 	}
 
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putString("mHostName", mHostName);
-        outState.putString("mHostAddress",mHostAddress);
+        outState.putString(ARG_HOST_NAME, mHostName);
+        outState.putString(ARG_HOST_ADDRESS, mHostAddress);
+        outState.putStringArray(ARG_VALUES, mValues);
     }
 
     @Override
@@ -93,35 +102,34 @@ public class StatisticFragment extends Fragment {
 	}
 
 	public void put(Pinger p) {
-        mLastPinger = p;
-        if ( mView == null ) return;
         double req = p.getRequests();
         double res = p.getResponses();
         double los = req > 0 ? (req - res) * 100.0 / req : 0;
         if ( res > 0 ) {
-            setText(R.id.last_value, "%.3f", p.getLast());
-            setText(R.id.count_value, "%.0f / %.0f (%.1f%%)", req, res, los );
-            setText(R.id.mean_value, "%.3f \u00b1 %.3f", p.getMean(), p.getMStd());
-            setText(R.id.max_value, "%.3f / %.3f", p.getMax(), p.getMin());
+            mValues = new String[] {
+                    String.format(Locale.US, "%.3f", p.getLast()),
+                    String.format(Locale.US, "%.0f / %.0f (%.1f%%)", req, res, los),
+                    String.format(Locale.US, "%.3f \u00b1 %.3f", p.getMean(), p.getMStd()),
+                    String.format(Locale.US, "%.3f / %.3f", p.getMax(), p.getMin())
+            };
         } else {
-            setText(R.id.last_value,  "");
-            if ( req > 0 ) setText(R.id.count_value, "%.0f / 0 (100%%)", req);
-            else         setText(R.id.count_value, "");
-            setText(R.id.mean_value,  "");
-            setText(R.id.max_value,   "");
+            mValues = new String[] {"", "", "", ""};
+            if (req > 0) mValues[1] = String.format(Locale.US, "%.0f / 0 (100%%)", req);
         }
+        updateValueViews();
 	}
+
+    private void updateValueViews() {
+        if (mView != null) {
+            for(int i = 0; i < 4; i++) mValueViews[i].setText(mValues[i]);
+        }
+    }
 
 	private void setText(int id, String text) {
 		TextView view = (TextView) mView.findViewById(id);
 		view.setText(text);
 	}
 	
-	private void setText(int id, String format, Object... value ) {
-		TextView view = (TextView) mView.findViewById(id);
-		view.setText( String.format(Locale.US, format, value) );
-	}
-
     public void clear() {
         setHostName("", false);
         setHostAddress("", false);

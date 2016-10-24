@@ -2,6 +2,8 @@
 <resources>
 
     <string name="app_name">Ping</string>
+    <string name="app_description"># ping &#8230;</string>
+    <string name="app_about">Simple and handy ICMP ping utility</string>
 
     <string name="action_settings">Settings</string>
     <string name="action_input">Host name or IP</string>

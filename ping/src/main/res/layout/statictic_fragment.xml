@@ -38,6 +38,18 @@
 
     </FrameLayout>
 
+    <FrameLayout style="@style/statistic_fragment_frame_layout" >
+
+        <TextView
+            style="@style/statistic_fragment_label"
+            android:text="@string/count_value" />
+
+        <TextView
+            android:id="@+id/count_value"
+            style="@style/statistic_fragment_value" />
+
+    </FrameLayout>
+
     <FrameLayout style="@style/statistic_fragment_frame_layout"
         android:layout_weight="1.5" >
         
@@ -57,18 +69,6 @@
     
     </FrameLayout>
 
-    <FrameLayout style="@style/statistic_fragment_frame_layout" >
-        
-        <TextView
-            style="@style/statistic_fragment_label"
-            android:text="@string/count_value" />
-        
-        <TextView
-            android:id="@+id/count_value"
-            style="@style/statistic_fragment_value" />
-
-    </FrameLayout>
-    
     <FrameLayout style="@style/statistic_fragment_frame_layout" >
         
         <TextView
