@@ -70,4 +70,11 @@
     <string name="pref_vibrate_summary_off">Запрещено</string>
     <string name="pref_vibrate_summary_on">Разрешено</string>
     <string name="pref_vibrate_title">Вибрация</string>
+    <string name="app_about">ICMP ping by PNApp</string>
+    <string name="app_description"># ping &#8230;</string>
+    <string name="pref_app_theme_title">Тема оформления</string>
+    <string name="app_theme_deep_orange">Насыщенно оранжевая</string>
+    <string name="app_theme_gray">Серая</string>
+    <string name="app_theme_green">Зелёная</string>
+    <string name="app_theme_indigo">Индиго</string>
 </resources>

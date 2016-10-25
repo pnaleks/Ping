@@ -4,6 +4,7 @@
 package pnapp.tools.ping;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 import android.os.Bundle;
@@ -59,6 +60,12 @@ public class SettingsFragment extends PreferenceFragment implements OnSharedPref
 	
 	@Override
 	public void onSharedPreferenceChanged(SharedPreferences prefs, String key) {
+        if (PingActivity.PREF_APP_THEME.equals(key)) {
+            Intent intent = new Intent(getActivity(), PingActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(intent);
+            return;
+        }
         if ( prefs.getBoolean(PingActivity.PREF_ENABLE_OPTIONS,false) ) {
             String summary = getOptions(prefs);
             if (summary != null) {
@@ -76,7 +83,12 @@ public class SettingsFragment extends PreferenceFragment implements OnSharedPref
 		super.onResume();
 		SharedPreferences prefs = getPreferenceScreen().getSharedPreferences();
         onSharedPreferenceChanged(prefs, "");
-		getPreferenceScreen().getSharedPreferences().registerOnSharedPreferenceChangeListener(this);
+		prefs.registerOnSharedPreferenceChangeListener(this);
+
+        findPreference(PingActivity.PREF_APP_THEME).setSummary(
+                getResources().getStringArray(R.array.pref_app_theme_entries)[
+                        Integer.valueOf(prefs.getString(PingActivity.PREF_APP_THEME,"0")) ]
+        );
 	}
 	
 	@Override

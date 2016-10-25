@@ -16,4 +16,15 @@
         <!-- Задает формат представления текущего значения в крайне правом положении -->
         <attr name="strMax" format="string"/>
     </declare-styleable>
+
+    <declare-styleable name="PingTheme">
+        <attr name="pingBackgroundColor" format="color"/>
+        <attr name="pingCardBackgroundColor" format="color"/>
+        <attr name="pingTextColor" format="color"/>
+        <attr name="pingHintColor" format="color"/>
+        <attr name="pingHeaderBackgroundColor" format="color"/>
+        <attr name="pingDrawerBackgroundColor" format="color"/>
+        <attr name="pingDrawerBackgroundColorPressed" format="color"/>
+
+    </declare-styleable>
 </resources>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <TextView
+        android:text="@string/ip_address"
+        style="@style/statistic_fragment_label"/>
+
+    <TextView
+        android:id="@+id/ip_address"
+        style="@style/statistic_fragment_value"/>
+
+    <android.support.v4.widget.ContentLoadingProgressBar
+        android:id="@+id/progress_resolve"
+        style="@style/statisticsFragmentProgressBar"/>
+
+</merge>

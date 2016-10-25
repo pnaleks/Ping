@@ -25,15 +25,15 @@ public class StatisticFragment extends Fragment {
     private ContentLoadingProgressBar mReverseProgressBar;
 
 
-    public String mHostName = "";
-    public String mHostAddress = "";
+    public static String mHostName = "";
+    public static String mHostAddress = "";
 
     private String[] mValues;
     private TextView[] mValueViews;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		mView = inflater.inflate(R.layout.statictic_fragment, container, false);
+		mView = inflater.inflate(R.layout.statistic_fragment, container, false);
 
         mValueViews = new TextView[] {
                 (TextView) mView.findViewById(R.id.last_value),
@@ -57,8 +57,6 @@ public class StatisticFragment extends Fragment {
 
         mResolveProgressBar.hide();
         mReverseProgressBar.hide();
-
-
 
 		return mView;
 	}

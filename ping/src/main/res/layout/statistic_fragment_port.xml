@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <android.support.v7.widget.CardView
+        app:cardBackgroundColor="?attr/pingCardBackgroundColor"
+        style="@style/statistic_fragment_frame_layout">
+
+        <include layout="@layout/card_host_name"/>
+    </android.support.v7.widget.CardView>
+
+    <android.support.v7.widget.CardView
+        app:cardBackgroundColor="?attr/pingCardBackgroundColor"
+        style="@style/statistic_fragment_frame_layout">
+
+        <include layout="@layout/card_ip_address"/>
+    </android.support.v7.widget.CardView>
+
+    <android.support.v7.widget.CardView
+        app:cardBackgroundColor="?attr/pingCardBackgroundColor"
+        style="@style/statistic_fragment_frame_layout" >
+
+        <include layout="@layout/card_count_value"/>
+    </android.support.v7.widget.CardView>
+
+    <android.support.v7.widget.CardView
+        app:cardBackgroundColor="?attr/pingCardBackgroundColor"
+        style="@style/statistic_fragment_frame_layout"
+        android:layout_weight="1.5" >
+
+        <include layout="@layout/card_last_value"/>
+    </android.support.v7.widget.CardView>
+
+    <android.support.v7.widget.CardView
+        app:cardBackgroundColor="?attr/pingCardBackgroundColor"
+        style="@style/statistic_fragment_frame_layout" >
+
+        <include layout="@layout/card_mean_value"/>
+    </android.support.v7.widget.CardView>
+
+    <android.support.v7.widget.CardView
+        app:cardBackgroundColor="?attr/pingCardBackgroundColor"
+        style="@style/statistic_fragment_frame_layout">
+
+        <include layout="@layout/card_max_value"/>
+    </android.support.v7.widget.CardView>
+
+</merge>

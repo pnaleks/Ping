@@ -8,7 +8,7 @@
     android:layout_gravity="center_vertical"
     android:textSize="@dimen/list_view_group_text1"
     android:textStyle="italic"
-    android:textColor="#ffffe0b0"
+    android:textColor="?attr/pingHintColor"
     android:background="@android:color/transparent"
     android:paddingLeft="4dp"
     android:paddingTop="12dp"

@@ -17,8 +17,7 @@
 		android:layout_height="wrap_content"
 		android:paddingLeft="@dimen/action_button_min_width"
 		android:textSize="@dimen/list_view_item_text1"
-		android:textColor="#ffffffff"
-		android:background="@android:color/transparent"/>
+		android:textColor="?attr/pingTextColor"/>
 
     <TextView
         android:id="@android:id/text2"
@@ -26,7 +25,6 @@
     	android:layout_height="wrap_content"
         android:paddingLeft="@dimen/action_button_min_width"
         android:textSize="@dimen/list_view_item_text2"
-        android:textColor="#ffffe0b0"
-        android:background="@android:color/transparent" />
+        android:textColor="?attr/pingHintColor"/>
     
 </LinearLayout>

@@ -5,6 +5,12 @@
 
     <PreferenceCategory
         android:title="@string/pref_category_program">
+        <ListPreference
+            android:key="pref_app_theme"
+            android:title="@string/pref_app_theme_title"
+            android:entries="@array/pref_app_theme_entries"
+            android:entryValues="@array/pref_app_theme_entryValues"/>
+
         <CheckBoxPreference
             android:key="pref_resolve_address"
             android:title="@string/pref_resolve_address_title"

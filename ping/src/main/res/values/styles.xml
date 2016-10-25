@@ -1,10 +1,10 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
 
     <!--
         Base application theme, dependent on API level. This theme is replaced
         by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
     -->
-    <style name="AppBaseTheme" parent="Theme.AppCompat.Light">
+    <style name="AppBaseTheme" parent="Theme.AppCompat">
         <!--
             Theme customizations available in newer API levels can go in
             res/values-vXX/styles.xml, while customizations related to
@@ -13,16 +13,55 @@
     </style>
 
     <!-- Application theme. -->
-    <style name="AppTheme" parent="AppBaseTheme">
-        <!-- All customizations that are NOT specific to a particular API-level can go here. -->
+    <style name="DeepOrangeTheme" parent="AppBaseTheme">
+        <item name="pingBackgroundColor">@color/deep_orange_100</item>
+        <item name="pingCardBackgroundColor">@color/deep_orange_500</item>
+        <item name="pingTextColor">@color/deep_orange_50</item>
+        <item name="pingHintColor">@color/deep_orange_100</item>
+        <item name="pingHeaderBackgroundColor">@color/deep_orange_300</item>
+        <item name="pingDrawerBackgroundColor">@color/deep_orange_500</item>
+        <item name="pingDrawerBackgroundColorPressed">@color/deep_orange_300</item>
     </style>
-    
+
+    <style name="GreenTheme" parent="AppBaseTheme">
+        <item name="pingBackgroundColor">@color/green_50</item>
+        <item name="pingCardBackgroundColor">@color/green_600</item>
+        <item name="pingTextColor">@color/green_50</item>
+        <item name="pingHintColor">@color/green_200</item>
+        <item name="pingHeaderBackgroundColor">@color/green_500</item>
+        <item name="pingDrawerBackgroundColor">@color/green_700</item>
+        <item name="pingDrawerBackgroundColorPressed">@color/green_500</item>
+    </style>
+
+    <style name="IndigoTheme" parent="AppBaseTheme">
+        <item name="pingBackgroundColor">@color/indigo_50</item>
+        <item name="pingCardBackgroundColor">@color/indigo_600</item>
+        <item name="pingTextColor">@color/indigo_50</item>
+        <item name="pingHintColor">@color/indigo_200</item>
+        <item name="pingHeaderBackgroundColor">@color/indigo_500</item>
+        <item name="pingDrawerBackgroundColor">@color/indigo_700</item>
+        <item name="pingDrawerBackgroundColorPressed">@color/indigo_500</item>
+    </style>
+
+    <style name="GrayTheme" parent="AppBaseTheme">
+        <item name="pingBackgroundColor">@color/grey_50</item>
+        <item name="pingCardBackgroundColor">@color/grey_600</item>
+        <item name="pingTextColor">@color/grey_50</item>
+        <item name="pingHintColor">@color/grey_200</item>
+        <item name="pingHeaderBackgroundColor">@color/grey_900</item>
+        <item name="pingDrawerBackgroundColor">@color/grey_600</item>
+        <item name="pingDrawerBackgroundColorPressed">@color/grey_800</item>
+    </style>
+
+
+
+    <style name="AppTheme" parent="DeepOrangeTheme"/>
+
+
+
     <style name="statistic_fragment_frame_layout">
-        <item name="android:layout_marginLeft">@dimen/statistic_fragment_frame_layout_margin</item>
-        <item name="android:layout_marginTop">@dimen/statistic_fragment_frame_layout_margin</item>
-        <item name="android:layout_marginRight">@dimen/statistic_fragment_frame_layout_margin</item>
-        <item name="android:layout_marginBottom">0dp</item>
-        <item name="android:background">@color/ping_color_dark</item>
+        <item name="android:layout_margin">2dp</item>
+        <item name="android:background">?attr/pingCardBackgroundColor</item>
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">0dp</item>
         <item name="android:layout_weight">1</item>
@@ -35,8 +74,7 @@
         <item name="android:layout_gravity">left|bottom</item>
         <item name="android:layout_margin">2dp</item>
         <item name="android:textSize">@dimen/statistic_fragment_label_text</item>
-        <item name="android:textColor">@color/ping_color_light</item>
-        <item name="android:background">@android:color/transparent</item>
+        <item name="android:textColor">?attr/pingHintColor</item>
     </style>
     
     <style name="statistic_fragment_value">
@@ -45,8 +83,7 @@
         <item name="android:layout_gravity">top|center_horizontal</item>
         <item name="android:layout_margin">2dp</item>
         <item name="android:textSize">@dimen/statistic_fragment_value_text_normal</item>
-        <item name="android:textColor">@color/ping_color_text</item>
-        <item name="android:background">@android:color/transparent</item>
+        <item name="android:textColor">?attr/pingTextColor</item>
         <item name="android:singleLine">true</item>
         <item name="android:scrollHorizontally">true</item>
     </style>
@@ -58,15 +95,4 @@
         <item name="android:alpha">0.33</item>
     </style>
 
-    <style name="page_indicator">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_gravity">bottom</item>
-        <item name="android:gravity">center</item>
-        <item name="android:layout_margin">0dp</item>
-        <item name="android:padding">0dp</item>
-        <item name="android:textColor">@color/ping_color_dark</item>
-        <item name="android:textSize" tools:ignore="SpUsage">10dp</item>
-    </style>
-    
 </resources>

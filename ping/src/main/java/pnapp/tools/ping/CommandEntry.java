@@ -133,6 +133,14 @@ public class CommandEntry extends FrameLayout {
 			mTextView.setEnabled(true);
 		}
 	}
+
+	public void setActionPlay() {
+		if (isRunning) {
+			isRunning = false;
+			mButtonLeft.setImageDrawable(mDrawablePlay);
+			mTextView.setEnabled(true);
+		}
+	}
 	
 	private void onLeftButton() {
 		if (isRunning) {

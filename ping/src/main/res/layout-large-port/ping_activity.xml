@@ -23,7 +23,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:background="@color/ping_color_light">
+        android:background="?attr/pingBackgroundColor">
 
         <FrameLayout
             android:id="@+id/container1"
@@ -37,7 +37,7 @@
             android:layout_height="1dp"
             android:layout_marginLeft="@dimen/statistic_fragment_frame_layout_margin"
             android:layout_marginRight="@dimen/statistic_fragment_frame_layout_margin"
-            android:background="@color/ping_color_dark"/>
+            android:background="?attr/pingCardBackgroundColor"/>
 
         <FrameLayout
             android:id="@+id/container2"

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <TextView
+        android:text="@string/mean_value"
+        style="@style/statistic_fragment_label"/>
+
+    <TextView
+        android:id="@+id/mean_value"
+        style="@style/statistic_fragment_value"/>
+
+    <TextView
+        android:layout_gravity="end|top"
+        android:text="@string/ms"
+        style="@style/statistic_fragment_label"/>
+
+</merge>

@@ -14,7 +14,7 @@
 		android:hint="@string/action_input"
 		android:layout_gravity="bottom"
 		android:gravity="left|center_vertical"
-		android:textColor="@color/primary_text"
+		android:textColor="@color/command_entry_text"
 		android:textColorHint="#80ffffff"
 		android:fitsSystemWindows="true"
 		android:inputType="text"

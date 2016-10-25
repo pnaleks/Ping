@@ -65,6 +65,8 @@ public class PingActivity extends AppCompatActivity implements
     public static final String PREF_TIMEOUT           = "pref_timeout";
     public static final String PREF_PACKET_SIZE       = "pref_packet_size";
 
+    public static final String PREF_APP_THEME         = "pref_app_theme";
+
     /** Содержит строки для автоподстановки */
     private HashSet<String> mAutoCompleteSet;
     /** Содержит список избранного */
@@ -101,9 +103,17 @@ public class PingActivity extends AppCompatActivity implements
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.ping_activity);
 
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
+
+        final int[] themes = {
+                R.style.GrayTheme, R.style.GreenTheme, R.style.IndigoTheme, R.style.DeepOrangeTheme};
+
+        setTheme(themes[ Integer.parseInt(sp.getString(PREF_APP_THEME,"0")) ]);
+
+        setContentView(R.layout.ping_activity);
+
+
         FragmentManager fm = getSupportFragmentManager();
  
         mPinger.setOnPingListener(this);
@@ -253,11 +263,9 @@ public class PingActivity extends AppCompatActivity implements
                 mPinger.cancel();
             }
 			mEntryView.setText(item.name);
-            return;
+            //return;
 		}
-        if (item.type == DrawerAdapter.ITEM_TYPE.HEADER) {
-            Toast.makeText(this, R.string.app_about, Toast.LENGTH_SHORT).show();
-        }
+        // if (item.type == DrawerAdapter.ITEM_TYPE.HEADER)
     }
 
     @Override
@@ -333,7 +341,7 @@ public class PingActivity extends AppCompatActivity implements
         statisticFragment.put(resolver);
         if (mPinger.isRunning()) return;
 		if (mCancelled) {
-			mEntryView.toggleAction();
+			mEntryView.setActionPlay();
 		} else {
             String host;
 			host = resolver.getHostName();
