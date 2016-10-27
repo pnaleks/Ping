@@ -84,11 +84,11 @@ class NetworkScanner implements OnPingListener {
 	}
 
 	/** Интерфейс для обработчика найденных сетевых узлов */
-	public interface OnNetworkNodeFoundListener {
+	interface OnNetworkNodeFoundListener {
 		void onNetworkNodeFound(String host, String description);
 	}
 	private OnNetworkNodeFoundListener mOnNetworkNodeFoundListener;
-	public void setOnNetworkNodeFoundListener ( OnNetworkNodeFoundListener listener ) {
+	void setOnNetworkNodeFoundListener ( OnNetworkNodeFoundListener listener ) {
 		mOnNetworkNodeFoundListener = listener;
 	}
 }

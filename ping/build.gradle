@@ -7,13 +7,16 @@ android {
         applicationId "pnapp.tools.ping"
         minSdkVersion 11
         targetSdkVersion 25
-        versionCode 6
-        versionName '1.1.4'
+        versionCode 9
+        versionName '1.2.0'
     }
     buildTypes {
         release {
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            minifyEnabled false
         }
     }
     productFlavors {

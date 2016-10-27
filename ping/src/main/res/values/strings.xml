@@ -102,12 +102,14 @@
     <string name="drawer_close">Close navigation drawer</string>
 
     <string name="pref_app_theme_title">Application Theme</string>
-    <string name="app_theme_gray">Gray</string>
+    <string name="app_theme_light_gray">Light gray</string>
+    <string name="app_theme_gray">Dark gray</string>
     <string name="app_theme_green">Green</string>
     <string name="app_theme_indigo">Indigo</string>
     <string name="app_theme_deep_orange">Deep Orange</string>
 
     <string-array name="pref_app_theme_entries">
+        <item>@string/app_theme_light_gray</item>
         <item>@string/app_theme_gray</item>
         <item>@string/app_theme_green</item>
         <item>@string/app_theme_indigo</item>
@@ -119,6 +121,9 @@
         <item>1</item>
         <item>2</item>
         <item>3</item>
+        <item>4</item>
     </string-array>
+
+    <string name="pref_app_theme_default_value" translatable="false">4</string>
 
 </resources>

@@ -22,9 +22,7 @@
         <attr name="pingCardBackgroundColor" format="color"/>
         <attr name="pingTextColor" format="color"/>
         <attr name="pingHintColor" format="color"/>
-        <attr name="pingHeaderBackgroundColor" format="color"/>
         <attr name="pingDrawerBackgroundColor" format="color"/>
         <attr name="pingDrawerBackgroundColorPressed" format="color"/>
-
     </declare-styleable>
 </resources>

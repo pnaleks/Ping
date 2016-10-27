@@ -107,9 +107,10 @@ public class PingActivity extends AppCompatActivity implements
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
 
         final int[] themes = {
-                R.style.GrayTheme, R.style.GreenTheme, R.style.IndigoTheme, R.style.DeepOrangeTheme};
+                R.style.LightGrayTheme,
+                R.style.DarkGrayTheme, R.style.GreenTheme, R.style.IndigoTheme, R.style.DeepOrangeTheme};
 
-        setTheme(themes[ Integer.parseInt(sp.getString(PREF_APP_THEME,"0")) ]);
+        setTheme(themes[ Integer.parseInt(sp.getString(PREF_APP_THEME,"4")) ]);
 
         setContentView(R.layout.ping_activity);
 
@@ -385,7 +386,8 @@ public class PingActivity extends AppCompatActivity implements
         mInputText = host;
         mCancelled = false;
         if ( Resolver.isHostAddress(host) ) {
-            mPinger.ping(mOptions, host); // TODO: Добавить в автокомплит
+            if ( mAutoCompleteSet.add(host) ) mAutoCompleteAdapter.add(host);
+            mPinger.ping(mOptions, host);
             if (mResolveAddress) {
                 mResolver.resolve(host, true);
                 statisticFragment.setHostName(null, true);

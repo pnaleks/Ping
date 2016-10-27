@@ -9,7 +9,8 @@
             android:key="pref_app_theme"
             android:title="@string/pref_app_theme_title"
             android:entries="@array/pref_app_theme_entries"
-            android:entryValues="@array/pref_app_theme_entryValues"/>
+            android:entryValues="@array/pref_app_theme_entryValues"
+            android:defaultValue="@string/pref_app_theme_default_value"/>
 
         <CheckBoxPreference
             android:key="pref_resolve_address"

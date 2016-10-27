@@ -144,7 +144,7 @@ class Resolver {
 		
 		@Override
 		protected InetAddress doInBackground(String... host) {
-			synchronized (this) {try { wait(3000);} catch (InterruptedException e) {e.printStackTrace();}} // TODO: УБРАТЬ!!!
+			//synchronized (this) {try { wait(3000);} catch (InterruptedException e) {e.printStackTrace();}}
 			InetAddress address = null;
 			try {
 				address = InetAddress.getByName(host[0]);

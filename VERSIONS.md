@@ -1,3 +1,20 @@
+Version 1.2.0
+=============
+
+en-US
+-----
+* Themes
+* Reverse DNS lookup in the background
+* New layout in landscape mode
+* Code optimized, bugs fixed
+
+ru-RU
+-----
+* Темы
+* Обратный поиск DNS в фоновом режиме
+* Новый дизайн в ландшафтном режиме
+* Код оптимизирован, исправлены ошибки
+
 Verison 1.1.3
 =============
 
